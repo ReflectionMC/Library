@@ -18,8 +18,11 @@ jobs:
           distribution: temurin
           java-version: 21
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
       - name: Build
-        run: gradlew clean build
+        run: ./gradlew clean build
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
@@ -34,7 +37,7 @@ jobs:
           ssh-key: ${{ secrets.MVN_DEPLOY_KEY }}
 
       - name: Publish
-        run: gradlew publish -PdeployRepoPath="$PWD/deploy-repo"
+        run: ./gradlew publish -PdeployRepoPath="$PWD/deploy-repo"
 
       - name: Commit and push
         run: |
