@@ -35,7 +35,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: ReflectionMC/mvn.reflection.ghosty.im
+          ref: main
           path: deploy-repo
+          fetch-depth: '1'
           ssh-key: ${{ secrets.MVN_DEPLOY_KEY }}
 
       - name: Publish
