@@ -1,34 +1,16 @@
 package im.ghosty.reflection.api;
 
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
-public class Reflection {
-
-	private static Plugin initiator;
+public class Reflection extends JavaPlugin {
 	
-	/**
-	 * Initializes Reflection API.
-	 * @param plugin The plugin that was used to start the initialization
-	 */
-	public static void initialize(Plugin plugin) {
-		if(initiator != null) throw new ReflectionAlreadyInitializedException();
-		if(plugin == null) throw new NullPointerException("plugin must be defined.");
-		initiator = plugin;
-		
-		Bukkit.getConsoleSender().sendMessage("Real plugin loaded!");
+	private boolean wasInitiated = false;
+	
+	@Override
+	public void onLoad() {
+		if (wasInitiated) return;
+		wasInitiated = true;
+		this.getLogger().info("hiiii i'm cute right? :3");
 	}
 	
-	/**
-	 * This Exception is thrown when Reflection API has already been initialized.
-	 * @see Reflection#initialize(Plugin)
-	 */
-	public static class ReflectionAlreadyInitializedException extends RuntimeException {
-		
-		public ReflectionAlreadyInitializedException() {
-			super("Reflection was already initialized using '" + initiator.getName() + "'.");
-		}
-		
-	}
-
 }

@@ -1,6 +1,7 @@
 plugins {
     id("java")
     id("maven-publish")
+    id("com.gradleup.shadow") version "8.3.5"
 }
 
 group = "im.ghosty.reflection"
@@ -35,6 +36,26 @@ publishing {
             }
         } else {
             mavenLocal()
+        }
+    }
+}
+
+tasks {
+    compileJava {
+        options.encoding = "UTF-8"
+    }
+
+    assemble {
+        dependsOn(shadowJar)
+    }
+
+    shadowJar {
+        archiveClassifier.set("")
+    }
+
+    processResources {
+        filesMatching("plugin.yml") {
+            expand("version" to project.version)
         }
     }
 }

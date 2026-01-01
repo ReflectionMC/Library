@@ -1,0 +1,6 @@
+name: ReflectionAPI
+author: Reflection
+website: https://modrinth.com/organization/reflection
+description: This API was automatically added by one of your plugins, which depends on it to run properly.
+version: ${version}
+main: im.ghosty.reflection.api.Reflection
